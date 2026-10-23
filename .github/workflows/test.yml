@@ -1,0 +1,17 @@
+name: Schedule test
+
+on:
+  workflow_dispatch:          # "Run workflow" button for manual testing
+  schedule:
+    - cron: "*/5 * * * *"     # every 5 minutes (GitHub's fastest; often delayed)
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello! Scheduling works."
+          echo "Triggered by: ${{ github.event_name }}"
+          echo "UTC time now:       $(date -u)"
+          echo "Singapore time now: $(TZ=Asia/Singapore date)"
